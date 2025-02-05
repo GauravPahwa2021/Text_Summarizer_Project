@@ -4,6 +4,7 @@ from src.textSummarizer.exception import CustomException
 from src.textSummarizer.pipeline.stage_1_data_ingestion_pipeline import DataIngestionTrainingPipeline
 from src.textSummarizer.pipeline.stage_2_data_transformation_pipeline import DataTransformationTrainingPipeline
 from src.textSummarizer.pipeline.stage_3_model_trainer_pipeline import ModelTrainerTrainingPipeline
+from src.textSummarizer.pipeline.stage_4_model_evaluation import ModelEvaluationTrainingPipeline   
 
 
 STAGE_NAME="Data Ingestion stage"
@@ -32,5 +33,15 @@ try:
     model_trainer_pipeline=ModelTrainerTrainingPipeline()
     model_trainer_pipeline.initiate_model_trainer()
     logger.info(f"Stage {STAGE_NAME} Completed")
+except Exception as e:
+    raise CustomException(e,sys)
+
+
+STAGE_NAME = "Model Evaluation stage"
+try: 
+   logger.info(f"stage {STAGE_NAME} initiated")
+   model_evaluation=ModelEvaluationTrainingPipeline()
+   model_evaluation.initiate_model_evaluation()
+   logger.info(f"stage {STAGE_NAME} completed")
 except Exception as e:
     raise CustomException(e,sys)
